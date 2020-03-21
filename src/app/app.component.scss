@@ -1,0 +1,19 @@
+@import "../styles.scss";
+
+.header {
+  text-align: center;
+  padding: 15px 0;
+  background-color: $color-teal;
+  color: #ffffff;
+  font-family: "Baloo Da 2";
+  font-size: 1.3rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+  .logo {
+    width: 30px;
+  }
+}

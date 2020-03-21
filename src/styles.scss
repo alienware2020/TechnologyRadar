@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+$color-teal: #5f5f9d; //  #03a8b4;
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.form-control {
+  color: #60607a;
+  font-size: 0.8rem;
+  background: transparent;
+  border: none;
+}
