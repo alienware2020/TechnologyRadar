@@ -4,6 +4,7 @@ $color-teal: #5f5f9d; //  #03a8b4;
 
 body {
   font-family: "Roboto", sans-serif;
+  background-color: #f8f8f8;
 }
 
 .form-control {
@@ -11,4 +12,8 @@ body {
   font-size: 0.8rem;
   background: transparent;
   border: none;
+}
+
+.bg-white{
+    background-color: #ffffff;
 }

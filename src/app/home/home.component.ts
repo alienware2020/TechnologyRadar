@@ -42,6 +42,7 @@ export class HomeComponent {
     radius = this.width / 2;
     showExpandedChart = false;
     graphLoaded = false;
+    formSubmitted = false;
 
     arc = d3.arc()
         .startAngle(d => d.x0)
@@ -77,7 +78,12 @@ export class HomeComponent {
         reader.readAsBinaryString(file);
     }
 
-    rerenderChart() {
+    renderChart() {
+        this.formSubmitted = true;
+        const emptyData = _.filter(this.inputData, (data) => data.ASP === '' || data.Category === '' || data.Maturity === '' || data.Technology === '');
+        if (emptyData.length) {
+            return;
+        }
         this.convertToDesiredJson(null);
         const svg = document.getElementById('sunburst').getElementsByTagName('svg')[0];
         if (svg != null) {

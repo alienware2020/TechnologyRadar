@@ -1,10 +1,10 @@
-<div class="row content">
-    <div class="col-5 transition" *ngIf="!showExpandedChart">
+<div class="row content mx-0">
+    <div class="col-5 transition pt-4" *ngIf="!showExpandedChart">
         <div class='file-input'>
             <input type="file" (change)="onFileChange($event)" />
             <!-- <input type='file'> -->
             <span class='button'>Choose</span>
-            <span class='label' #fileLabel>Select excel file</span>
+            <span class='label' #fileLabel>Select excel to view chart</span>
         </div>
         <div class="or">
             - or -
@@ -23,10 +23,14 @@
                 <tbody>
                     <tr *ngFor="let data of inputData; let odd=odd; let even=even;"
                         [ngClass]="{ odd: odd, even: even }">
-                        <td><input [(ngModel)]="data.ASP" placeholder="Enter ASP" class="form-control"></td>
-                        <td><input [(ngModel)]="data.Category" placeholder="Enter Category.." class="form-control"></td>
-                        <td><input [(ngModel)]="data.Maturity" placeholder="Enter Maturity.." class="form-control"></td>
-                        <td><input [(ngModel)]="data.Technology" placeholder="Enter Technology.." class="form-control">
+                        <td><input [(ngModel)]="data.ASP" placeholder="Enter ASP"
+                                [ngClass]="{invalid: formSubmitted && data.ASP == ''}" class="form-control"></td>
+                        <td><input [(ngModel)]="data.Category" placeholder="Enter Category.."
+                                [ngClass]="{invalid: formSubmitted && data.Category == ''}" class="form-control"></td>
+                        <td><input [(ngModel)]="data.Maturity" placeholder="Enter Maturity.."
+                                [ngClass]="{invalid: formSubmitted && data.Maturity == ''}" class="form-control"></td>
+                        <td><input [(ngModel)]="data.Technology" placeholder="Enter Technology.."
+                                [ngClass]="{invalid: formSubmitted && data.Technology == ''}" class="form-control">
                         </td>
                         <td>
                             <span (click)="remove(data)" class="cursor-pointer"><i
@@ -34,9 +38,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="p-3 text-right">
+                        <td colspan="5" class="p-3 text-right bg-white">
                             <button (click)="addItem()" class="btn btn-primary-outline mr-2">Add</button>
-                            <button (click)="rerenderChart()" class="btn btn-primary">Show Chart</button>
+                            <button type="submit" (click)="renderChart()" class="btn btn-primary">Show Chart</button>
                         </td>
                     </tr>
                 </tbody>
@@ -44,7 +48,7 @@
         </div>
         <br>
     </div>
-    <div class="col transition">
+    <div class="col transition chart-container">
         <div class="expand text-right pt-4 pr-4" *ngIf="graphLoaded">
             <span (click)="toggleChartExpandedView()" class="cursor-pointer"><i class="fas"
                     [ngClass]="showExpandedChart? 'fa-compress' : 'fa-expand'"></i></span>
@@ -52,11 +56,12 @@
         <div *ngIf="!graphLoaded" class="graph-placeholder">
             <img src="../../assets/images/graph.svg" alt="">
             <div>
-                <div class="heading">No data found to create graph</div>
-                <div class="sub-heading">Please chose an excel file or add data</div>
+                <div class="heading">Select a file</div>
+                <div class="sub-heading">- or -</div>
+                <div class="heading">Add data to view the chart</div>
             </div>
         </div>
-        <div [hidden]="!graphLoaded">
+        <div>
             <div id="sunburst" class="sunburst">
                 <div #chart id="chart"></div>
             </div>
